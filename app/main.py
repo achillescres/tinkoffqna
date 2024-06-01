@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import os
 from typing import Union, Annotated
 
 from fastapi import FastAPI, Depends
@@ -12,6 +13,11 @@ from .depends import get_qna_service
 from .models import HTTPValidationError, Request, Response
 
 from .service.qna import QnaService
+
+from dotenv import load_dotenv
+
+load_dotenv(".env", verbose=True)
+print(os.getcwd())
 
 app = FastAPI(
     title='Assistant API',

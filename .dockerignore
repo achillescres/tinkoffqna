@@ -1,0 +1,7 @@
+venv/
+test/
+Makefile
+openapi.yaml
+readme.md
+.idea/
+.DS_store/
