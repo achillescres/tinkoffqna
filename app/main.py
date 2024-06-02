@@ -14,10 +14,25 @@ from app.depends import get_qna_service
 from app.models import HTTPValidationError, Request, Response
 
 from app.service.qna import QnaService
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title='Assistant API',
     version='0.1.0',
+)
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
 )
 
 
