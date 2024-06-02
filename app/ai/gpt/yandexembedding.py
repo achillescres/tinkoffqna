@@ -29,6 +29,7 @@ class YandexEmbedding:
         }
 
     def get_embedding(self, text: str, text_type: str = "query") -> np.array:
+        print()
         query_data = {
             "modelUri": self.model_uri,
             "text": text,

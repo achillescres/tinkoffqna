@@ -2,8 +2,8 @@ import pandas as pd
 from openai import OpenAI
 
 from app.ai.qna import AbstractQna
-from .utils import get_top_n_nearest_docs
-from .yandexembedding import YandexEmbedding
+from app.ai.gpt.utils import get_top_n_nearest_docs
+from app.ai.gpt.yandexembedding import YandexEmbedding
 
 
 class GptQna(AbstractQna):
@@ -27,7 +27,7 @@ class GptQna(AbstractQna):
     def query_answer(self, query: str) -> (str, list[str]):
         return self.generate_answer(query), []
 
-    def generate_questions(self, data, model_name="gpt-3.5-turbo"):
+    def generate_questions(self, data, model_name="gpt-3.5-turbo-16k-0613"):
         completion = self.open_ai_client.chat.completions.create(
             model=model_name,
             temperature=0.0,

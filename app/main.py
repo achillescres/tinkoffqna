@@ -4,20 +4,16 @@
 
 from __future__ import annotations
 
-import os
 from typing import Union, Annotated
 
+import uvicorn
 from fastapi import FastAPI, Depends
 
-from .depends import get_qna_service
-from .models import HTTPValidationError, Request, Response
+from app.config import Config
+from app.depends import get_qna_service
+from app.models import HTTPValidationError, Request, Response
 
-from .service.qna import QnaService
-
-from dotenv import load_dotenv
-
-load_dotenv(".env", verbose=True)
-print(os.getcwd())
+from app.service.qna import QnaService
 
 app = FastAPI(
     title='Assistant API',
@@ -37,3 +33,7 @@ def assist_assist_post(
 ) -> Union[Response, HTTPValidationError]:
     answer, links = qna_service.query_answer(body.query)
     return Response(text=answer, links=links)
+
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", port=Config.port, reload=False, log_level="debug")
